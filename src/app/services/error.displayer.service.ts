@@ -8,7 +8,9 @@ export class ErrorDisplayerService {
 
   constructor(private _snackBar: MatSnackBar) { }
 
-  openSnackBar(message: string) {
-    this._snackBar.open(message);
+  openSnackBar(message: string, action: string = "Dismiss") {
+    this._snackBar.open(message,action,{
+      duration: 2000,
+    });
   }
 }
