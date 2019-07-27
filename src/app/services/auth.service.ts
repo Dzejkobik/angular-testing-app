@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, mapTo, tap } from 'rxjs/operators'
 import { Tokens } from '../models/Tokens';
+import { ErrorDisplayerService } from './error.displayer.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AuthService {
     apiUrl: "http://localhost:54904/api/users"
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private errorDisplayer:ErrorDisplayerService) { }
 
   login(user: {username: string, password: string}) : Observable<boolean> {
     return this.http.post<any>(`${this.config.apiUrl}/signin`, user)
@@ -49,7 +50,7 @@ export class AuthService {
       tap(() => this.doLogoutUser()),
       mapTo(true),
       catchError(error => {
-        alert(error.error);
+        this.errorDisplayer.openSnackBar("Logout error " + error);
         return of(false);
       })
     )
@@ -72,9 +73,8 @@ export class AuthService {
     }).pipe(tap((tokens: Tokens) => {
       this.storeJwtToken(tokens.jwt);
     }),catchError(error => {
-      console.log('inside refresh token error')
         this.doLogoutUser();
-        alert(error);
+        this.errorDisplayer.openSnackBar("Refresh token error " + error);
         return of(false);
     }))
   }
