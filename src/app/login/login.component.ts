@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import {JwtHelperService} from "@auth0/angular-jwt";
 
 @Component({
   selector: 'app-login',
@@ -32,9 +33,16 @@ export class LoginComponent implements OnInit {
     )
     .subscribe(success => {
       console.log('success = ' + success);
+      console.log(this.decodeToken());
       if (success) {
         this.router.navigate(['/home']);
       }
     });
+  }
+
+  decodeToken() {
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(this.authService.getJwtToken());
+    return decodedToken;
   }
 }
