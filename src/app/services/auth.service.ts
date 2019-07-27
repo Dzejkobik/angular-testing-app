@@ -13,18 +13,19 @@ export class AuthService {
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
   private loggedUser: string;
 
-   config : {
-    apiUrl: ""
+  config = {
+    apiUrl: "http://localhost:54904/api/users"
   }
 
   constructor(private http: HttpClient) { }
 
   login(user: {username: string, password: string}) : Observable<boolean> {
-    return this.http.post<any>(`${this.config.apiUrl}/login`, user)
+    return this.http.post<any>(`${this.config.apiUrl}/signin`, user)
       .pipe(
         tap(tokens => this.doLoginUser(user.username, tokens)),
         mapTo(true),
         catchError(error => {
+          console.log(error)
           alert(error.error);
           return of(false);
         })
