@@ -71,6 +71,11 @@ export class AuthService {
       'refreshToken' : this.getRefreshToken()
     }).pipe(tap((tokens: Tokens) => {
       this.storeJwtToken(tokens.jwt);
+    }),catchError(error => {
+      console.log('inside refresh token error')
+        this.doLogoutUser();
+        alert(error);
+        return of(false);
     }))
   }
 
