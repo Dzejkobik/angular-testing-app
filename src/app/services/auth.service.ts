@@ -27,7 +27,7 @@ export class AuthService {
         mapTo(true),
         catchError(error => {
           console.log(error)
-          alert(error.error);
+          this.errorDisplayer.openSnackBar(error.error);
           return of(false);
         })
       )
