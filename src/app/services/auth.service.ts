@@ -66,6 +66,7 @@ export class AuthService {
   }
 
   refreshToken() {
+    console.log("TRYING TO REFRESH TOKEN")
     return this.http.post<any>(`${this.config.apiUrl}/refresh`, {
       'refreshToken' : this.getRefreshToken()
     }).pipe(tap((tokens: Tokens) => {
