@@ -1,6 +1,23 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div *ngIf="isUserLoggedIn">
+
     <p>APP COMPONENT HTML HERE WILL BE NAVBAR ETC</p>
+    <mat-drawer-container class="example-container">
+        <mat-drawer mode="side" opened>
+            Drawer content
+        </mat-drawer>
+        <mat-drawer-content>
+            <mat-toolbar class="navbar">
+                <div>Logo</div>
+                <div>
+                    <span>Home</span>
+                    <span>About</span>
+                    <span>Services</span>
+                </div>
+            </mat-toolbar>
+            <router-outlet></router-outlet>
+        </mat-drawer-content>
+    </mat-drawer-container>
 </div>
 
 <router-outlet></router-outlet>

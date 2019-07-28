@@ -1,0 +1,26 @@
+.example-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+mat-drawer {
+    width: 16%;
+    background-color: coral;
+    border: none;
+}
+
+mat-drawer-content {
+    background-color: white;
+}
+
+.navbar {
+    justify-content: space-between;
+    background-color: coral;
+}
+
+span {
+    padding-right: 1em;
+}

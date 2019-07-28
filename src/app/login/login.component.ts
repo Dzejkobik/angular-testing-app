@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
       console.log(this.decodeToken());
       if (success) {
         this.router.navigate(['/home']);
+        window.location.reload();
       }
     });
   }
